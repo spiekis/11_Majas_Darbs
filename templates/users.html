@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>All users</title>
+{% endblock %}
+
+{% block content %}
+<ul>
+<h1> Users list:</h1>
+{% if user %}
+    {% for user in users %}
+    <li> <a href="{% url 'get-user' user_id=user.id %}">
+       <!-- ID: {{ user.id}} <br> -->
+        <strong>{{ user.username }}</strong> <br>
+        <!-- E-mail: {{ user.e_mail }} -->
+        </a>
+    </li>
+    {% endfor %}
+
+{% else %}
+    <p>Don't have any users yet</p>
+{% endif %}
+
+</ul>
+
+<form action="/add-user" method="get">
+    <input type="submit" value="Add new user">
+</form>
+
+<form action="/filter-users/user" method="get">
+    <input type="submit" value="Fielter user">
+</form>
+
+<form action="/" method="get">
+    <input type="submit" value="View users">
+</form>
+
+<form action="/add-user-csv" method="get">
+    <input type="submit" value="Add users with CSV">
+</form>
+
+{% endblock %}
